@@ -9,9 +9,9 @@ import Base from "./layouts/Base";
 import Text from "./components/Text";
 import { spacing, fontSize } from "./theme";
 
-type AccountCreatedProps = { name: string };
+type AccountCreatedProps = { subject: string; body: string };
 
-const AccountCreated: Template<AccountCreatedProps> = ({ name }) => (
+const AccountCreated: Template<AccountCreatedProps> = ({ subject, body }) => (
   <Base width={600}>
     <Header loose />
     <MjmlSection cssClass="lg-gutter" paddingBottom={spacing.s9}>
@@ -24,11 +24,9 @@ const AccountCreated: Template<AccountCreatedProps> = ({ name }) => (
     </MjmlSection>
     <MjmlSection cssClass="gutter">
       <MjmlColumn>
-        <Heading fontSize={fontSize.xl}>{name}, your table awaits.</Heading>
+        <Heading fontSize={fontSize.xl}>{subject}</Heading>
         <Text paddingTop={spacing.s7} paddingBottom={spacing.s7}>
-          Thank you for joining BookBook! We’re excited to help you enjoy great
-          meals without any begging, guessing, waiting or phone calls. Just a
-          couple taps, and the table is yours.
+          {body}
         </Text>
         <Button href="https://www.mailing.run">Book a Reservation</Button>
         <Text paddingTop={spacing.s7}>
@@ -42,6 +40,6 @@ const AccountCreated: Template<AccountCreatedProps> = ({ name }) => (
   </Base>
 );
 
-AccountCreated.subject = ({ name }) => `Welcome to BookBook, ${name}!`;
+AccountCreated.subject = ({ subject }) => `${subject}`;
 
 export default AccountCreated;

@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
 import DropDown, { VibeType } from "../components/DropDown";
 import Footer from "../components/Footer";
@@ -16,9 +16,8 @@ const Home: NextPage = () => {
   const [desc, setDesc] = useState("");
   const [lang, setLang] = useState<VibeType>("English");
   const [generatedDescs, setGeneratedDescs] = useState<string>("");
-  const defultDesc =
-    "Tell David to have a meeting next Monday morning from Hudson.";
-  console.log("Streamed response: ", { generatedDescs });
+  const [isDone, setIsDone] = useState(false);
+  const defultDesc = "Shopping Cart";
   let promptObj = {
     English: "UK English",
     中文: "Simplified Chinese",
@@ -39,7 +38,7 @@ const Home: NextPage = () => {
     promptObj[lang]
   } that is friendly, but still professional and appropriate for the workplace. The email topic is:${text}${
     text.slice(-1) === "." ? "" : "."
-  }`;
+  }. And finally, you only need to generate a JSON format of the email like this: {"subject": "your email subject", "body": "your email body"} and without any special characters`;
 
   const generateDesc = async (e: any) => {
     e.preventDefault();
@@ -55,16 +54,6 @@ const Home: NextPage = () => {
       }),
     });
 
-    const res = await fetch("/api/writeEmail", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        TEST: "123",
-      }),
-    });
-    console.log("writeEmail response: ", res);
     console.log("Edge function returned.");
 
     if (!response.ok) {
@@ -88,8 +77,27 @@ const Home: NextPage = () => {
       setGeneratedDescs((prev) => prev + chunkValue);
     }
 
+    setIsDone(true);
     setLoading(false);
   };
+
+  useEffect(() => {
+    (async () => {
+      console.log(isDone);
+      if (isDone === true) {
+        toast.success("Email Generated");
+        await fetch("/api/writeEmail", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            generatedDescs,
+          }),
+        });
+      }
+    })();
+  }, [isDone, generatedDescs]);
 
   return (
     <div className="flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
