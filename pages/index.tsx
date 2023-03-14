@@ -38,9 +38,11 @@ const Home: NextPage = () => {
     promptObj[lang]
   } that is friendly, but still professional and appropriate for the workplace. The email topic is:${text}${
     text.slice(-1) === "." ? "" : "."
-  }. And finally, you only need to generate a JSON format of the email like this: {"subject": "your email subject", "body": "your email body"} and without any special characters`;
+  }. And finally, you only need to generate a JSON format of the email like this: {"subject": "your email subject", "body": "your email body", "buttonText": "your button text", "buttonUrl": "https://exaple.buttonurl.com", "category": "email category in English"} and category should be one of the following: "Welcome", "Newsletters", "Promotional", "Abandoned Cart", "Referral", "Others". The json field value should not have any special characters`;
 
-  const generateDesc = async (e: any) => {
+  const revisePrompt = `Revise the email content in ${promptObj[lang]}. The email content is:${text}. And finally, you only need to generate a JSON format of the email like this: {"subject": "your email subject", "body": "your email content"} and without any special characters`;
+
+  const generateDesc = async (e: any, type: "generate" | "revise") => {
     e.preventDefault();
     setGeneratedDescs("");
     setLoading(true);
@@ -50,7 +52,7 @@ const Home: NextPage = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        prompt,
+        prompt: type === "generate" ? prompt : revisePrompt,
       }),
     });
 
@@ -83,9 +85,7 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     (async () => {
-      console.log(isDone);
       if (isDone === true) {
-        toast.success("Email Generated");
         await fetch("/api/writeEmail", {
           method: "POST",
           headers: {
@@ -183,11 +183,19 @@ const Home: NextPage = () => {
           {!loading && (
             <button
               className="bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-4 mt-3 hover:bg-black/80 w-full"
-              onClick={(e) => generateDesc(e)}
+              onClick={(e) => generateDesc(e, "generate")}
             >
               Generate your email &rarr;
             </button>
           )}
+          {/* {!loading && (
+            <button
+              className="bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-4 mt-3 hover:bg-black/80 w-full"
+              onClick={(e) => generateDesc(e, "revise")}
+            >
+              Decorate your email &rarr;
+            </button>
+          )} */}
           {loading && (
             <button
               className="bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-4 mt-3 hover:bg-black/80 w-full"
