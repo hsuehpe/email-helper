@@ -9,19 +9,14 @@ import Base from "./layouts/Base";
 import Text from "./components/Text";
 import { spacing, fontSize } from "./theme";
 
-type AccountCreatedProps = {
+type WelcomeProps = {
   subject: string;
   body: string;
   buttonText: string;
   buttonUrl: string;
 };
 
-const AccountCreated: Template<AccountCreatedProps> = ({
-  subject,
-  body,
-  buttonText,
-  buttonUrl,
-}) => (
+const Welcome = ({ subject, body, buttonText, buttonUrl }: WelcomeProps) => (
   <Base width={600}>
     <Header loose />
     <MjmlSection cssClass="lg-gutter" paddingBottom={spacing.s9}>
@@ -50,6 +45,4 @@ const AccountCreated: Template<AccountCreatedProps> = ({
   </Base>
 );
 
-AccountCreated.subject = ({ subject }) => `${subject}`;
-
-export default AccountCreated;
+export default Welcome;

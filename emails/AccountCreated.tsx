@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { MjmlSection, MjmlColumn, MjmlImage } from "mjml-react";
 import { Template } from "mailing-core";
 import Button from "./components/Button";
@@ -11,7 +11,7 @@ import { spacing, fontSize } from "./theme";
 
 type AccountCreatedProps = { subject: string; body: string };
 
-const AccountCreated: Template<AccountCreatedProps> = ({ subject, body }) => (
+const AccountCreated = ({ subject, body }: AccountCreatedProps) => (
   <Base width={600}>
     <Header loose />
     <MjmlSection cssClass="lg-gutter" paddingBottom={spacing.s9}>
@@ -39,7 +39,5 @@ const AccountCreated: Template<AccountCreatedProps> = ({ subject, body }) => (
     <Footer includeUnsubscribe />
   </Base>
 );
-
-AccountCreated.subject = ({ subject }) => `${subject}`;
 
 export default AccountCreated;

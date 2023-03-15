@@ -10,20 +10,7 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-const vibes = [
-  "English",
-  "中文",
-  "繁體中文",
-  "日本語",
-  "Italiano",
-  "Español",
-  "Deutsch",
-  "Français",
-  "Nederlands",
-  "한국어",
-  "ភាសាខ្មែរ",
-  "हिंदी",
-] as const;
+const vibes = ["English", "繁體中文", "日本語"] as const;
 
 export type VibeType = typeof vibes[number];
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { MjmlSection, MjmlColumn, MjmlImage } from "mjml-react";
 import { Template } from "mailing-core";
 import Button from "./components/Button";
@@ -16,12 +16,12 @@ type AccountCreatedProps = {
   buttonUrl: string;
 };
 
-const AccountCreated: Template<AccountCreatedProps> = ({
+const AccountCreated = ({
   subject,
   body,
   buttonText,
   buttonUrl,
-}) => (
+}: AccountCreatedProps) => (
   <Base width={600}>
     <Header loose />
     <MjmlSection cssClass="gutter">
@@ -46,10 +46,8 @@ const AccountCreated: Template<AccountCreatedProps> = ({
         />
       </MjmlColumn>
     </MjmlSection>
-    <Footer includeUnsubscribe />
+    <Footer />
   </Base>
 );
-
-AccountCreated.subject = ({ subject }) => `${subject}`;
 
 export default AccountCreated;
