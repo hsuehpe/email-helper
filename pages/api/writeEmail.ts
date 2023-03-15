@@ -2,7 +2,7 @@ import type { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import { join, relative } from "path";
 import { render } from "mjml-react";
-import AccountCreated from "../../emails/AccountCreated";
+import AccountCreated from "../../emails/Basic";
 import Welcome from "../../emails/Welcome";
 import AbandonedCart from "../../emails/AbandonedCart";
 
@@ -19,13 +19,13 @@ const handler = async (req: any, res: any) => {
   if (!fs.existsSync(DIST_DIR)) fs.mkdirSync(DIST_DIR);
   const { generatedDescs } = req.body;
   console.log(generatedDescs);
-  const { category, subject, body, buttonUrl, buttonText } =
+  const { category, subject, body, buttonUrl, buttonText, imageUrls } =
     JSON.parse(generatedDescs);
   const template = TEMPLATES[category] || AccountCreated;
 
   try {
     const { html } = render(
-      template({ subject, body, buttonUrl, buttonText }),
+      template({ subject, body, buttonUrl, buttonText, imageUrls }),
       {
         validationLevel: "soft",
       }

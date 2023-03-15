@@ -14,7 +14,7 @@ const Header: React.FC<HeaderProps> = ({ loose }) => {
           width="49px"
           height="54px"
           align="center"
-          src="https://s3.amazonaws.com/lab.campsh.com/bb-transparent%402x.png"
+          src="../emails/assets/shoplogo.jpg"
           cssClass="invert"
         />
       </MjmlColumn>

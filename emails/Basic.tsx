@@ -1,7 +1,5 @@
-import React, { FC } from "react";
+import React from "react";
 import { MjmlSection, MjmlColumn, MjmlImage } from "mjml-react";
-import { Template } from "mailing-core";
-import Button from "./components/Button";
 import Header from "./components/Header";
 import Heading from "./components/Heading";
 import Footer from "./components/Footer";
@@ -27,12 +25,6 @@ const AccountCreated = ({ subject, body }: AccountCreatedProps) => (
         <Heading fontSize={fontSize.xl}>{subject}</Heading>
         <Text paddingTop={spacing.s7} paddingBottom={spacing.s7}>
           {body}
-        </Text>
-        <Button href="https://www.mailing.run">Book a Reservation</Button>
-        <Text paddingTop={spacing.s7}>
-          Enjoy!
-          <br />
-          The BookBook Team
         </Text>
       </MjmlColumn>
     </MjmlSection>

@@ -1,6 +1,5 @@
-import React, { FC } from "react";
+import React from "react";
 import { MjmlSection, MjmlColumn, MjmlImage } from "mjml-react";
-import { Template } from "mailing-core";
 import Button from "./components/Button";
 import Header from "./components/Header";
 import Heading from "./components/Heading";
@@ -14,6 +13,7 @@ type AccountCreatedProps = {
   body: string;
   buttonText: string;
   buttonUrl: string;
+  imageUrls: string[];
 };
 
 const AccountCreated = ({
@@ -21,6 +21,7 @@ const AccountCreated = ({
   body,
   buttonText,
   buttonUrl,
+  imageUrls,
 }: AccountCreatedProps) => (
   <Base width={600}>
     <Header loose />
@@ -30,20 +31,21 @@ const AccountCreated = ({
         <Text paddingTop={spacing.s7} paddingBottom={spacing.s7}>
           {body}
         </Text>
+        <MjmlSection cssClass="lg-gutter" paddingBottom={spacing.s9}>
+          {imageUrls &&
+            imageUrls.length &&
+            imageUrls.map((url, index) => (
+              <MjmlColumn>
+                <MjmlImage width={"200px"} src={url} key={index} />
+              </MjmlColumn>
+            ))}
+        </MjmlSection>
         <Button href={buttonUrl}>{buttonText}</Button>
         <Text paddingTop={spacing.s7}>
           Enjoy!
           <br />
           testing store
         </Text>
-      </MjmlColumn>
-    </MjmlSection>
-    <MjmlSection cssClass="lg-gutter" paddingBottom={spacing.s9}>
-      <MjmlColumn>
-        <MjmlImage
-          align="left"
-          src="https://s3.amazonaws.com/lab.campsh.com/bb-hero%402x.jpg"
-        />
       </MjmlColumn>
     </MjmlSection>
     <Footer />

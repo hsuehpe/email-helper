@@ -17,7 +17,7 @@ export default function Footer({ includeUnsubscribe }: FooterProps) {
           fontSize={fontSize.sm}
           color={colors.neutral400}
         >
-          © {new Date().getFullYear()} BookBook
+          © {new Date().getFullYear()} testing store
           {includeUnsubscribe && (
             <>
               &nbsp;&nbsp;·&nbsp;&nbsp;

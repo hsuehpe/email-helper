@@ -1,13 +1,9 @@
 import { AnimatePresence, motion } from "framer-motion";
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
 import DropDown, { VibeType } from "../components/DropDown";
-import Footer from "../components/Footer";
-// import Header from "../components/Header";
-import Github from "../components/GitHub";
 import LoadingDots from "../components/LoadingDots";
 import ResizablePanel from "../components/ResizablePanel";
 
@@ -16,6 +12,7 @@ const Home: NextPage = () => {
   const [desc, setDesc] = useState("");
   const [lang, setLang] = useState<VibeType>("English");
   const [generatedDescs, setGeneratedDescs] = useState<string>("");
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [isDone, setIsDone] = useState(false);
   const defultDesc = "Shopping Cart";
   let promptObj = {
@@ -29,7 +26,7 @@ const Home: NextPage = () => {
     promptObj[lang]
   } that is friendly, but still professional and appropriate for the workplace. The email topic is:${text}${
     text.slice(-1) === "." ? "" : "."
-  }. And finally, you only need to generate a JSON format of the email like this: {"subject": "your email subject", "body": "your email body", "buttonText": "your button text", "buttonUrl": "https://exaple.buttonurl.com", "category": "email category in English"} and category should be one of the following: "Welcome", "Newsletters", "Promotional", "AbandonedCart", "Referral", "Others". The json field value should not have any special characters`;
+  }. And finally, you only need to generate a JSON format of the email like this: {"subject": "your email subject", "body": "your email body", "buttonText": "your button text", "buttonUrl": "https://exaple.buttonurl.com", "category": "email category in English", "imageUrls": ${imageUrls}} and category should be one of the following: "Welcome", "Newsletters", "Promotional", "AbandonedCart", "Referral", "Others". The json field value should not have any special characters`;
 
   const generateDesc = async (e: any) => {
     e.preventDefault();
@@ -103,9 +100,8 @@ const Home: NextPage = () => {
         {/* <p className="text-slate-500 mt-5">18,167 bios generated so far.</p> */}
         <div className="max-w-xl w-full">
           <div className="flex mt-4 items-center space-x-3 mb-3">
-            <Image src="/1-black.png" width={30} height={30} alt="1 icon" />
             <p className="text-left font-medium">
-              Write a few sentences about your desired email.
+              1. Write a few sentences about your desired email.
             </p>
           </div>
           <textarea
@@ -116,11 +112,21 @@ const Home: NextPage = () => {
             placeholder={"e.g. " + defultDesc}
           />
           <div className="flex mb-5 items-center space-x-3">
-            <Image src="/2-black.png" width={30} height={30} alt="1 icon" />
-            <p className="text-left font-medium">Select your language.</p>
+            <p className="text-left font-medium">2. Select your language.</p>
           </div>
           <div className="block">
             <DropDown vibe={lang} setVibe={(newLang) => setLang(newLang)} />
+          </div>
+          <div className="flex mb-5 items-center space-x-3">
+            <p className="text-left font-medium">3. input your image urls</p>
+          </div>
+          <div className="block">
+            <input
+              type="text"
+              className="w-full"
+              placeholder="imput your image urls"
+              onChange={(e) => setImageUrls(e.target.value.split(","))}
+            />
           </div>
 
           {!loading && (
