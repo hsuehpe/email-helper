@@ -27,9 +27,8 @@ const Home: NextPage = () => {
     promptObj[lang]
   } that is friendly, but still professional and appropriate for the workplace. The email topic is:${keyword}${
     text.slice(-1) === "." ? "" : "."
-  }. And user input is ${options}. And finally, you only need to generate a JSON format of the email like this: {"title": "your response or user input", "content": "your response or user input", "buttonText": "your response or user input", "buttonUrl": buttonUrl, imageUrls: [url1, url2, ...],"category": "email category in English"} , and category should be one of the following: "Welcome", "Newsletters", "Promotional", "AbandonedCart", "Referral", "Others". The json field value should not have any special characters`;
+  }. And user input is ${options}. And finally, you only need to generate a JSON and format is: {"title": "your response or user input", "content": "your response or user input", "buttonText": "your response or user input", "buttonUrl": buttonUrl, imageUrls: [url1, url2, ...],"category": "email category in English"} , and category should be one of the following: "Welcome", "Newsletters", "Promotional", "AbandonedCart", "Referral", "Others". The field value of the JSON should not have any special characters and transform the new line character to <br>`;
 
-  console.log(prompt);
   const generateDesc = async (e: any) => {
     e.preventDefault();
     setGeneratedDescs("");

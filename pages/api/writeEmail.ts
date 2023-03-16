@@ -17,8 +17,10 @@ const TEMPLATES: {
 const handler = async (req: any, res: any) => {
   fs.writeFileSync("./emails/emails.json", JSON.stringify(req.body), "utf-8");
   if (!fs.existsSync(DIST_DIR)) fs.mkdirSync(DIST_DIR);
-  const { generatedDescs } = req.body;
-  console.log(generatedDescs);
+  let { generatedDescs } = req.body;
+  if (!generatedDescs || typeof generatedDescs !== "string")
+    return res.status(400).json({ error: "No data" });
+  if (generatedDescs[0] !== "{") generatedDescs = "{" + generatedDescs;
   const { category, title, content, buttonUrl, buttonText, imageUrls } =
     JSON.parse(generatedDescs);
   const template = TEMPLATES[category] || Basic;
