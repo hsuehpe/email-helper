@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import Base from "./layouts/Base";
 import Text from "./components/Text";
 import { spacing, fontSize } from "./theme";
+import parse from "html-react-parser";
 
 type WelcomeProps = {
   title: string;
@@ -31,7 +32,7 @@ const Welcome = ({ title, content, buttonText, buttonUrl }: WelcomeProps) => (
       <MjmlColumn>
         <Heading fontSize={fontSize.xl}>{title ?? ""}</Heading>
         <Text paddingTop={spacing.s7} paddingBottom={spacing.s7}>
-          {content ?? ""}
+          {parse(content) ?? ""}
         </Text>
         <Button href={buttonUrl}>{buttonText}</Button>
         <Text paddingTop={spacing.s7}>
