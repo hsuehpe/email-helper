@@ -7,9 +7,9 @@ import Base from "./layouts/Base";
 import Text from "./components/Text";
 import { spacing, fontSize } from "./theme";
 
-type AccountCreatedProps = { subject: string; body: string };
+type AccountCreatedProps = { title: string; content: string };
 
-const AccountCreated = ({ subject, body }: AccountCreatedProps) => (
+const AccountCreated = ({ title, content }: AccountCreatedProps) => (
   <Base width={600}>
     <Header loose />
     <MjmlSection cssClass="lg-gutter" paddingBottom={spacing.s9}>
@@ -22,9 +22,9 @@ const AccountCreated = ({ subject, body }: AccountCreatedProps) => (
     </MjmlSection>
     <MjmlSection cssClass="gutter">
       <MjmlColumn>
-        <Heading fontSize={fontSize.xl}>{subject}</Heading>
+        <Heading fontSize={fontSize.xl}>{title ?? ""}</Heading>
         <Text paddingTop={spacing.s7} paddingBottom={spacing.s7}>
-          {body}
+          {content ?? ""}
         </Text>
       </MjmlColumn>
     </MjmlSection>

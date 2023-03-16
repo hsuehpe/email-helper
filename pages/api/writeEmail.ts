@@ -19,13 +19,13 @@ const handler = async (req: any, res: any) => {
   if (!fs.existsSync(DIST_DIR)) fs.mkdirSync(DIST_DIR);
   const { generatedDescs } = req.body;
   console.log(generatedDescs);
-  const { category, subject, body, buttonUrl, buttonText, imageUrls } =
+  const { category, title, content, buttonUrl, buttonText, imageUrls } =
     JSON.parse(generatedDescs);
   const template = TEMPLATES[category] || AccountCreated;
 
   try {
     const { html } = render(
-      template({ subject, body, buttonUrl, buttonText, imageUrls }),
+      template({ title, content, buttonUrl, buttonText, imageUrls }),
       {
         validationLevel: "soft",
       }

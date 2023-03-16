@@ -10,13 +10,13 @@ import Text from "./components/Text";
 import { spacing, fontSize } from "./theme";
 
 type WelcomeProps = {
-  subject: string;
-  body: string;
+  title: string;
+  content: string;
   buttonText: string;
   buttonUrl: string;
 };
 
-const Welcome = ({ subject, body, buttonText, buttonUrl }: WelcomeProps) => (
+const Welcome = ({ title, content, buttonText, buttonUrl }: WelcomeProps) => (
   <Base width={600}>
     <Header loose />
     <MjmlSection cssClass="lg-gutter" paddingBottom={spacing.s9}>
@@ -29,9 +29,9 @@ const Welcome = ({ subject, body, buttonText, buttonUrl }: WelcomeProps) => (
     </MjmlSection>
     <MjmlSection cssClass="gutter">
       <MjmlColumn>
-        <Heading fontSize={fontSize.xl}>{subject}</Heading>
+        <Heading fontSize={fontSize.xl}>{title ?? ""}</Heading>
         <Text paddingTop={spacing.s7} paddingBottom={spacing.s7}>
-          {body}
+          {content ?? ""}
         </Text>
         <Button href={buttonUrl}>{buttonText}</Button>
         <Text paddingTop={spacing.s7}>

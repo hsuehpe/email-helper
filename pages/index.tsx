@@ -12,7 +12,6 @@ const Home: NextPage = () => {
   const [desc, setDesc] = useState("");
   const [lang, setLang] = useState<VibeType>("English");
   const [generatedDescs, setGeneratedDescs] = useState<string>("");
-  const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [isDone, setIsDone] = useState(false);
   const defultDesc = "Shopping Cart";
   let promptObj = {
@@ -26,7 +25,7 @@ const Home: NextPage = () => {
     promptObj[lang]
   } that is friendly, but still professional and appropriate for the workplace. The email topic is:${text}${
     text.slice(-1) === "." ? "" : "."
-  }. And finally, you only need to generate a JSON format of the email like this: {"subject": "your email subject", "body": "your email body", "buttonText": "your button text", "buttonUrl": "https://exaple.buttonurl.com", "category": "email category in English", "imageUrls": ${imageUrls}} and category should be one of the following: "Welcome", "Newsletters", "Promotional", "AbandonedCart", "Referral", "Others". The json field value should not have any special characters`;
+  }. And finally, you only need to generate a JSON format of the email like this: {"title": "your email title", "content": "your email content", "buttonText": "your button text", "buttonUrl": buttonUrl, imageUrls: [url1, url2, ...],"category": "email category in English"}, and category should be one of the following: "Welcome", "Newsletters", "Promotional", "AbandonedCart", "Referral", "Others". The json field value should not have any special characters`;
 
   const generateDesc = async (e: any) => {
     e.preventDefault();
@@ -117,18 +116,6 @@ const Home: NextPage = () => {
           <div className="block">
             <DropDown vibe={lang} setVibe={(newLang) => setLang(newLang)} />
           </div>
-          <div className="flex mb-5 items-center space-x-3">
-            <p className="text-left font-medium">3. input your image urls</p>
-          </div>
-          <div className="block">
-            <input
-              type="text"
-              className="w-full"
-              placeholder="imput your image urls"
-              onChange={(e) => setImageUrls(e.target.value.split(","))}
-            />
-          </div>
-
           {!loading && (
             <button
               className="bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-4 mt-3 hover:bg-black/80 w-full"

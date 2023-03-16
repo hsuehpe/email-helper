@@ -9,16 +9,16 @@ import Text from "./components/Text";
 import { spacing, fontSize } from "./theme";
 
 type AccountCreatedProps = {
-  subject: string;
-  body: string;
+  title: string;
+  content: string;
   buttonText: string;
   buttonUrl: string;
   imageUrls: string[];
 };
 
 const AccountCreated = ({
-  subject,
-  body,
+  title,
+  content,
   buttonText,
   buttonUrl,
   imageUrls,
@@ -27,19 +27,19 @@ const AccountCreated = ({
     <Header loose />
     <MjmlSection cssClass="gutter">
       <MjmlColumn>
-        <Heading fontSize={fontSize.xl}>{subject}</Heading>
+        <Heading fontSize={fontSize.xl}>{title ?? ""}</Heading>
         <Text paddingTop={spacing.s7} paddingBottom={spacing.s7}>
-          {body}
+          {content ?? ""}
         </Text>
-        <MjmlSection cssClass="lg-gutter" paddingBottom={spacing.s9}>
-          {imageUrls &&
-            imageUrls.length &&
-            imageUrls.map((url, index) => (
+        {imageUrls && imageUrls.length && (
+          <MjmlSection cssClass="lg-gutter" paddingBottom={spacing.s9}>
+            {imageUrls.map((url, index) => (
               <MjmlColumn>
                 <MjmlImage width={"200px"} src={url} key={index} />
               </MjmlColumn>
             ))}
-        </MjmlSection>
+          </MjmlSection>
+        )}
         <Button href={buttonUrl}>{buttonText}</Button>
         <Text paddingTop={spacing.s7}>
           Enjoy!
