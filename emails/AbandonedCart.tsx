@@ -34,7 +34,7 @@ const AccountCreated = ({
         {imageUrls && imageUrls.length && (
           <MjmlSection cssClass="lg-gutter" paddingBottom={spacing.s9}>
             {imageUrls.map((url, index) => (
-              <MjmlColumn>
+              <MjmlColumn key={index}>
                 <MjmlImage width={"200px"} src={url} key={index} />
               </MjmlColumn>
             ))}

@@ -20,13 +20,16 @@ const Home: NextPage = () => {
     日本語: "Japanese",
   };
   let text = desc || defultDesc;
+  const keyword = text.split("\n")[0];
+  const options = text.split("\n").slice(1);
   // Generate a business email in UK English that is friendly, but still professional and appropriate for the workplace. The email topic is:
   const prompt = `Generate a business email in ${
     promptObj[lang]
-  } that is friendly, but still professional and appropriate for the workplace. The email topic is:${text}${
+  } that is friendly, but still professional and appropriate for the workplace. The email topic is:${keyword}${
     text.slice(-1) === "." ? "" : "."
-  }. And finally, you only need to generate a JSON format of the email like this: {"title": "your email title", "content": "your email content", "buttonText": "your button text", "buttonUrl": buttonUrl, imageUrls: [url1, url2, ...],"category": "email category in English"}, and category should be one of the following: "Welcome", "Newsletters", "Promotional", "AbandonedCart", "Referral", "Others". The json field value should not have any special characters`;
+  }. And user input is ${options}. And finally, you only need to generate a JSON format of the email like this: {"title": "your response or user input", "content": "your response or user input", "buttonText": "your response or user input", "buttonUrl": buttonUrl, imageUrls: [url1, url2, ...],"category": "email category in English"} , and category should be one of the following: "Welcome", "Newsletters", "Promotional", "AbandonedCart", "Referral", "Others". The json field value should not have any special characters`;
 
+  console.log(prompt);
   const generateDesc = async (e: any) => {
     e.preventDefault();
     setGeneratedDescs("");

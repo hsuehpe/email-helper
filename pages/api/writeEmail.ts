@@ -2,7 +2,7 @@ import type { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import { join, relative } from "path";
 import { render } from "mjml-react";
-import AccountCreated from "../../emails/Basic";
+import Basic from "../../emails/Basic";
 import Welcome from "../../emails/Welcome";
 import AbandonedCart from "../../emails/AbandonedCart";
 
@@ -21,7 +21,7 @@ const handler = async (req: any, res: any) => {
   console.log(generatedDescs);
   const { category, title, content, buttonUrl, buttonText, imageUrls } =
     JSON.parse(generatedDescs);
-  const template = TEMPLATES[category] || AccountCreated;
+  const template = TEMPLATES[category] || Basic;
 
   try {
     const { html } = render(
