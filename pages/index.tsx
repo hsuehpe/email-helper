@@ -96,13 +96,17 @@ const Home: NextPage = () => {
 
       <main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 mt-2 sm:mt-4">
         <h1 className="sm:text-3xl text-2xl max-w-1xl font-bold text-slate-900">
-          Generate your business emails in seconds
+          試試用 AI 產生你的 Email ！
         </h1>
         {/* <p className="text-slate-500 mt-5">18,167 bios generated so far.</p> */}
         <div className="max-w-xl w-full">
           <div className="flex mt-4 items-center space-x-3 mb-3">
             <p className="text-left font-medium">
-              1. Write a few sentences about your desired email.
+              1. 輸入關鍵字, 以及你想要的選項 (每行一個選項). 例如:
+              <br /> 購物車未結帳 <br />
+              圖片: https://picsum.photos/id/1/200/300,
+              https://picsum.photos/id/2/200/300,
+              https://picsum.photos/id/3/200/300
             </p>
           </div>
           <textarea
@@ -113,7 +117,7 @@ const Home: NextPage = () => {
             placeholder={"e.g. " + defultDesc}
           />
           <div className="flex mb-5 items-center space-x-3">
-            <p className="text-left font-medium">2. Select your language.</p>
+            <p className="text-left font-medium">2. 選擇語系.</p>
           </div>
           <div className="block">
             <DropDown vibe={lang} setVibe={(newLang) => setLang(newLang)} />
